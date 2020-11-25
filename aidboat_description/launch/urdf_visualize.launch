@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="model" default="" />
+	<arg name="gui" default="true" />
+	<arg name="config" default="urdf_config" />
+	
+	<param name="robot_description" command="cat &quot;$(find aidboat_description)/urdf/$(arg model).urdf&quot;" />
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+	<node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find aidboat_description)/rviz_config/$(arg config).rviz" />
+
+</launch>

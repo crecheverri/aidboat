@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<robot name="aidboat">
+
+<link name="base_link">
+    <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+        <mesh filename="package://aidboat_description/meshes/Base.dae"/>
+    </geometry>
+    </visual>
+</link>
+
+<joint name="base_to_hull1" type="fixed">
+    <parent link="base_link"/>
+    <child link="hull1_link"/>
+    <origin xyz="0.172098 0.447 0" rpy="0 0 0"/>
+</joint>
+
+<link name="hull1_link">
+    <visual>
+    <origin rpy="0 0 -0.0244346" xyz="0 0 0"/>
+    <geometry>
+        <mesh filename="package://aidboat_description/meshes/Hull3.dae"/>
+    </geometry>
+    </visual>
+</link>
+
+<joint name="base_to_hull2" type="fixed">
+    <parent link="base_link"/>
+    <child link="hull2_link"/>
+    <origin xyz="0.172098 -0.447 0" rpy="0 0 0"/>
+</joint>
+
+<link name="hull2_link">
+    <visual>
+    <origin rpy="0 0 0.0244346" xyz="0 0 0"/>
+    <geometry>
+        <mesh filename="package://aidboat_description/meshes/Hull3.dae"/>
+    </geometry>
+    </visual>
+</link>
+
+</robot>

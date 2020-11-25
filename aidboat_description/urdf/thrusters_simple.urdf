@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot name="aidboat-thrusters">
+
+<link name="CCWEngine">
+    <visual>
+    <origin rpy="0 0 0.0244346" xyz="0 0 0"/>
+    <geometry>
+        <mesh filename="package://aidboat_description/meshes/CCWEngine.dae"/>
+    </geometry>
+    </visual>
+</link>
+
+<!-- <joint name="base_to_CCWEngine" type="fixed">
+    <parent link="base_link"/>
+    <child link="CCWEngine"/>
+    <origin xyz="-0.741 -0.47 -0.308" rpy="0 0 0"/>
+</joint> -->
+
+<joint name="CCWEngine_to_Propeller" type="continuous">
+    <parent link="CCWEngine"/>
+    <child link="CCWPropeller"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis rpy="0 0 0" xyz="1 0 0"/>
+    <limit effort="100" velocity="100"/>
+    <dynamics friction="0.05" damping="0.05"/>
+</joint>
+
+<link name="CCWPropeller">
+    <visual>
+    <origin rpy="0 0 0.0244346" xyz="0 0 0"/>
+    <geometry>
+        <mesh filename="package://aidboat_description/meshes/CCWPropeller.dae"/>
+    </geometry>
+    </visual>
+</link>
+
+<link name="CWEngine">
+    <visual>
+    <origin rpy="0 0 -0.0244346" xyz="0 0 0"/>
+    <geometry>
+        <mesh filename="package://aidboat_description/meshes/CWEngine.dae"/>
+    </geometry>
+    </visual>
+</link>
+
+<!-- <joint name="base_to_CWEngine" type="fixed">
+    <parent link="base_link"/>
+    <child link="CWEngine"/>
+    <origin xyz="-0.741 0.469 -0.307001" rpy="0 0 0"/>
+</joint> -->
+
+<joint name="CWEngine_to_Propeller" type="continuous">
+    <parent link="CWEngine"/>
+    <child link="CWPropeller"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis rpy="0 0 0" xyz="1 0 0"/>
+    <limit effort="100" velocity="100"/>
+    <dynamics friction="0.05" damping="0.05"/>
+</joint>
+
+<link name="CWPropeller">
+    <visual>
+    <origin rpy="0 0 -0.0244346" xyz="0 0 0"/>
+    <geometry>
+        <mesh filename="package://aidboat_description/meshes/CWPropeller.dae"/>
+    </geometry>
+    </visual>
+</link>
+
+</robot>

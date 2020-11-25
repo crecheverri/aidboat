@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="aidboat">
+
+<link name="dummy">
+</link>
+
+<link name="base_link">
+	<inertial>
+		<mass value="9.7"/>
+		<inertia ixx="0.3268889088" ixy="0" ixz="0" iyy="0.1452968093" iyz="0" izz="0.1452968093"/>
+	</inertial>
+
+	<collision>
+		<origin xyz="0 0 0.1255" rpy="0 0 0"/>
+		<geometry>
+			<box size="0.73 1.15 0.251"/>
+		</geometry>
+	</collision>
+
+	<visual>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<geometry>
+			<mesh filename="package://aidboat_description/meshes/Base.dae"/>
+		</geometry>
+	</visual>
+</link>
+
+<joint name="dummy_joint" type="fixed">
+	<parent link="dummy"/>
+	<child link="base_link"/>
+</joint>
+
+<xacro:macro name="hulljoint" params="prefix reflect">
+<joint name="base_to_${prefix}" type="fixed">
+	<parent link="base_link" />
+	<child link="${prefix}_link" />
+	<origin xyz="0.172098 ${reflect*(0.447)} 0" rpy="0 0 0" />
+</joint>
+</xacro:macro>
+
+<xacro:hulljoint prefix="hull1" reflect="1" />
+<xacro:hulljoint prefix="hull2" reflect="-1" />
+
+<xacro:macro name="hull" params="prefix reflect">
+<link name="${prefix}_link">
+	<inertial>
+		<mass value="19.4"/>
+		<inertia ixx="0.07803639653" ixy="0" ixz="0" iyy="2.168007709" iyz="0" izz="2.168007709" />
+	</inertial>
+
+	<collision>
+		<origin xyz="0.1019 0 -0.146" rpy="0 0 ${reflect*(0.0244346)}" />
+		<geometry>
+			<box size="2.002 0.286 0.292" />
+		</geometry>
+	</collision>
+
+	<visual>
+		<origin rpy="0 0 ${reflect*(0.0244346)}" xyz="0 0 0" />
+		<geometry>
+			<mesh filename="package://aidboat_description/meshes/Hull.dae" />
+		</geometry>
+	</visual>
+</link>
+</xacro:macro>
+
+<xacro:hull prefix="hull1" reflect="-1" />
+<xacro:hull prefix="hull2" reflect="1" />
+
+</robot>
