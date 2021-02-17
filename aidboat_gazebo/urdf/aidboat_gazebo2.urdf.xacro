@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="aidboat">
+
+<!-- == Base vehicle == -->
+<xacro:include filename="$(find aidboat_description)/urdf/aidboat_base.urdf.xacro" />
+
+<!-- == Hydrodynamics plugins == -->
+<xacro:include filename="$(find aidboat_gazebo)/urdf/aidboat_gazebo_dynamics_plugin.xacro" />
+<xacro:usv_dynamics_gazebo name="aidboat" />
+
+<!-- == Thrusters == -->
+<!--<xacro:include filename="$(find aidboat_gazebo)/urdf/thruster_layouts/thrusters.urdf" />-->
+<xacro:include filename="$(find aidboat_gazebo)/urdf/thrusters_gazebo.xacro" />
+
+
+<!-- == Sensors == 
+<xacro:include filename="$(find aidboat_gazebo)/urdf/sensors/camera.xacro" />
+<xacro:aidboat_camera name="camera" />
+<xacro:include filename="$(find aidboat_gazebo)/urdf/sensors/gps.xacro" />
+<xacro:aidboat_gps name="gps" />
+<xacro:include filename="$(find aidboat_gazebo)/urdf/sensors/imu.xacro" />
+<xacro:aidboat_imu name="imu" />
+<xacro:include filename="$(find aidboat_gazebo)/urdf/sensors/lidar2.xacro" />
+<xacro:aidboat_lidar name="lidar" />
+<xacro:include filename="$(find aidboat_gazebo)/urdf/sensors/p3d.xacro" />
+<xacro:p3d name="ground_truth_odometry" /> -->
+
+</robot>

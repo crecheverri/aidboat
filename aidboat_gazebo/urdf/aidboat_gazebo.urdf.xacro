@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- Basic WAM-V with gazebo plugins for dynamics -->
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="aidboat">
+<xacro:arg name="thruster_namespace" default="thrusters/"/>
+<xacro:arg name="namespace" default="aidboat"/>    
+<xacro:property name="thruster_namespace" value="$(arg thruster_namespace)" scope="global" />
+<xacro:property name="namespace" value="$(arg namespace)" scope="global" />      
+  
+<xacro:include filename="$(find aidboat_gazebo)/urdf/aidboat_gazebo.xacro"/>
+<xacro:aidboat_gazebo thruster_layout="$(find aidboat_gazebo)/urdf/thruster_layouts/aidboat_aft_thrusters.xacro"/>
+
+
+
+</robot>

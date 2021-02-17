@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:macro name="aidboat_imu" params="name:=imu update_rate:=50">
+        <link name="${name}_link">
+            <visual name="${name}_visual">
+                <geometry>
+                    <box size="0.024 0.044 0.011"/>
+                </geometry>
+                <material name="White">
+                    <color rgba="1.0 1.0 1.0 1.0"/>
+                </material>
+            </visual>
+            <collision name="${name}_collision">
+                <geometry>
+                    <box size="0.044 0.024 0.011"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.018"/>
+                <inertia ixx="0.0000010455" ixy="0" ixz="0" iyy="0.000003768" iyz="0" izz="0.0000030855"/>
+            </inertial>
+            </link>
+                
+        <joint name="${name}_joint" type="fixed">
+            <origin xyz="-0.28 0 0.3386" rpy="0 0 0"/>
+            <parent link="base_link"/>
+            <child link="${name}_link"/>
+        </joint> 
+
+        <gazebo reference="${name}_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+
+        <gazebo>
+            <plugin name="imu_plugin_${name}" filename="libhector_gazebo_ros_imu.so">
+                <updateRate>${update_rate}</updateRate>
+                <bodyName>${name}_link</bodyName>
+                <topicName>aidboat/sensors/imu/imu/data</topicName>
+                <serviceName>aidboat/sensors/imu_service</serviceName>
+                <!--Manually prepend namespace to tf frame -->
+                <frameId>aidboat/${name}_link</frameId>
+                <alwaysOn>true</alwaysOn>
+                
+                <accelOffset>0.0 0.0 0.0</accelOffset>
+                <accelDrift>0.005 0.005 0.005</accelDrift>
+                <accelDriftFrequency>0.00027 0.00027 0.000027</accelDriftFrequency>
+                <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+
+                <rateOffset>0.0 0.0 0.0</rateOffset>
+                <rateDrift>0.005 0.005 0.005</rateDrift>
+                <rateDriftFrequency>0.00027 0.00027 0.000027</rateDriftFrequency>
+                <rateGaussianNoise>0.005 0.005 0.005</rateGaussianNoise>
+
+                <yawOffset>0.0</yawOffset>
+                <yawDrift>0.0</yawDrift>
+                <yawDriftFrequency>0.00027</yawDriftFrequency>
+                <yawGaussianNoise>0.0</yawGaussianNoise>
+            </plugin>
+        </gazebo>
+    </xacro:macro>
+</robot>

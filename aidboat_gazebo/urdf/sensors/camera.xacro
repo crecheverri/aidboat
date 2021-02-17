@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:macro name="aidboat_camera" params="name:=camera">
+        <link name="${name}_link">
+            <visual name="${name}_visual">
+                <origin xyz="0 -0.0147 -0.007" rpy="1.5708 0 1.5708"/>
+                <geometry>
+                    <mesh filename="package://aidboat_gazebo/models/camera/mesh/camera.dae"/>
+                </geometry>
+            </visual>
+            <collision name="${name}_collision">
+                <origin xyz="0.014 -0.0147 -0.007" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.028 0.0577 0.0403"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.116"/>
+                <inertia ixx="0.00004788267" ixy="0.0" ixz="0.0" iyy="0.0000397618" iyz="0.0" izz="0.0000232782"/>
+            </inertial>
+        </link>
+        <joint name="${name}_joint" type="fixed">
+            <origin xyz="0.355 0 0.422" rpy="0 0 0"/>
+            <parent link="base_link"/>
+            <child link="${name}_link"/>
+        </joint>
+
+        <link name="${name}_link_optical">
+        </link>
+
+        <joint name="${name}_to_${name}_optical_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+            <parent link="${name}_link"/>
+            <child link="${name}_link_optical"/>
+        </joint>
+        
+        <gazebo reference="${name}_link">
+            <mu1>0.2</mu1>
+            <mu2>0.2</mu2>
+        </gazebo>        
+        
+        <gazebo reference="${name}_link">
+            <sensor type="camera" name="${name}_sensor">
+                <update_rate>30.0</update_rate>
+                <camera name="${name}_camera">
+                    <horizontal_fov>1.3962634</horizontal_fov>
+                    <image>
+                        <width>1280</width>
+                        <height>720</height>
+                        <format>R8G8B8</format>
+                    </image>
+                    <clip>
+                        <near>0.05</near>
+                        <far>300</far>
+                    </clip>
+                    <noise>
+                        <type>gaussian</type>
+                        <!-- Noise is sampled independently per pixel on each frame. That pixel's noise value is added to ach of its color channels, which at that point lie in the range [0,1]. -->
+                        <mean>0.0</mean>
+                        <stddev>0.007</stddev>
+                    </noise>
+                </camera>
+                <plugin name="camera_plugin_${name}" filename="libgazebo_ros_camera.so">
+                    <alwaysOn>true</alwaysOn>
+                    <updateRate>0.0</updateRate>
+                    <cameraName>aidboat/sensors/${name}</cameraName>
+                    <imageTopicName>image_raw</imageTopicName>
+                    <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                    <frameName>${name}_link_optical</frameName>
+                    <hackBaseline>0.07</hackBaseline>
+                    <distorsionK1>0.0</distorsionK1>
+                    <distortionK2>0.0</distortionK2>
+                    <distortionK3>0.0</distortionK3>
+                    <distortionT1>0.0</distortionT1>
+                    <distortionT2>0.0</distortionT2>
+                </plugin>
+            </sensor>
+        </gazebo>
+    </xacro:macro>
+</robot>

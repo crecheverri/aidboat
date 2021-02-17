@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="p3d" params="name:=ground_truth_odometry">
+    <gazebo>
+      <plugin name="p3d_plugin_${name}" filename="libgazebo_ros_p3d.so">
+        <bodyName>base_link</bodyName>
+        <frameName>map</frameName>
+        <updateRate>10.0</updateRate>
+        <topicName>aidboat/sensors/position/${name}</topicName>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <gaussianNoise>0</gaussianNoise>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+</robot>
+
+<!-- The key consideration is that the P3D plugin generates a Odometry position that is relative to the Gazebo origin (typically we spawn moddels somewhere near 0,0,0). -->
+<!--The GPS/IMU sensors report an estimate of position in Lat/Long. The P3D node will convert this position from Gazebo-relative to a geographic position, but we need to define a Lat/Long position for the Gazebo origin. -->
+<!--This is done by passing parameters to the node. The P3D plugin also reports the linear velocity relative the Gazebo frame (twist.twist.linear). -->
+<!--The P3D transforms this velocity to the body-centered frame using the orientation in pose.pose.orientation. 3D Position Interface for Ground Truth --> 
+<!--This controller requires to a model as its parent. The plugin broadcasts a body's pose and rates through ROS nav_msgs::Odometry message-nav_msgs defines the common messages used to interact with the navigation stack -->
+<!--The navigation stack uses tf to determine the robot's location in the world and relate sensor data to a static map. However, tf does not provide any information about the velocity of the robot. -->
+<!-- Because of this, the navigation stack requires that any odometry source publish both a transform and a nav_msgs/Odometry message over ROS that contains velocity information. -->
+<!--The nav_msgs/Odometry message stores an estimate of the position and velocity of a robot in free space. The pose in this message corresponds to the estimated position of the robot in the odometric frame along with an optional covariance for the certainty of that pose estimate. -->
+<!-- The twist in this message corresponds to the robot's velocity in the chid frame, normally the coordinate frame of the mobile base, along with an optional covariance for the certainty of that velocity estimate.-->
