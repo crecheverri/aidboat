@@ -5,7 +5,7 @@
             <visual name="${name}_visual">
                 <origin xyz="0 -0.0147 -0.007" rpy="1.5708 0 1.5708"/>
                 <geometry>
-                    <mesh filename="package://aidboat_gazebo/models/camera/mesh/camera.dae"/>
+                    <mesh filename="package://aidboat_gazebo/meshes/camera.dae"/>
                 </geometry>
             </visual>
             <collision name="${name}_collision">
@@ -60,7 +60,7 @@
                         <stddev>0.007</stddev>
                     </noise>
                 </camera>
-                <plugin name="camera_plugin_${name}" filename="libgazebo_ros_camera.so">
+                <plugin name="aidboat_camera_plugin" filename="libgazebo_ros_camera.so">
                     <alwaysOn>true</alwaysOn>
                     <updateRate>0.0</updateRate>
                     <cameraName>aidboat/sensors/${name}</cameraName>

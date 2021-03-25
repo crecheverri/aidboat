@@ -5,7 +5,7 @@
             <visual name="${name}_visual">
                 <origin xyz="0 0 0" rpy="0 0 -1.5708"/>
                 <geometry>
-                    <mesh filename="package://aidboat_description/meshes/lidar.stl"/>
+                    <mesh filename="package://aidboat_gazebo/meshes/lidar.stl"/>
                     <!--<cylinder radius="0.0525" length="0.152"/>-->
                 </geometry>
             </visual>
@@ -36,17 +36,16 @@
             <child link="${name}_laser" />
         </joint>
 
-        <gazebo reference="${name}_link">
-            <mu1>0.2</mu1>
-            <mu2>0.2</mu2>
-        </gazebo>
+
+        <material name="black">
+            <color rgba="0 0 0 1.0"/>
+        </material>
         
-        <gazebo reference="${name}_link">
-            <sensor type="lidar" name="${name}_sensor">
-                <always_on>true</always_on>
-                <update_rate>15</update_rate>
+        <gazebo reference="${name}_laser">
+            <sensor type="ray" name="${name}_sensor">
                 <pose>0 0 0 0 0 0</pose>
-                <visualize>false</visualize>
+                <visualize>False</visualize>
+                <update_rate>15</update_rate>              
                 <ray>
                     <scan>
                         <horizontal>
@@ -61,15 +60,17 @@
                         <max>20.0</max>
                         <resolution>0.01</resolution>
                     </range>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.01</stddev>
+                    </noise>                    
                 </ray>
-                <plugin name="lidar_plugin_${name}" filename="libgazebo_ros_laser.so">
-                    <gaussianNoise>0.005</gaussianNoise>
-                    <alwaysOn>true</alwaysOn>
-                    <updateRate>15</updateRate>
-                    <topicName>/aidboat/laser/scan</topicName>
-                    <frameName>${name}_link</frameName>
+                <plugin name="aidboat_${name}_plugin" filename="libgazebo_ros_laser.so">
+                    <topicName>/aidboat/sensors/laser/scan</topicName>
+                    <frameName>${name}_laser</frameName>
                 </plugin>
             </sensor>
-        </gazebo>     
+        </gazebo>   
     </xacro:macro>
 </robot>

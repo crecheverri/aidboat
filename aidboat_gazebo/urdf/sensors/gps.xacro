@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-    <xacro:macro name="aidboat_gps" params="name:=gps lat:=21.30996 lon:=-157.8901 elev:=0.0 update_rate:=20">
+    <xacro:macro name="aidboat_gps" params="name:=gps">
         <link name="${name}_link">
             <visual name="${name}_visual">
                 <geometry>
@@ -32,26 +32,23 @@
         </gazebo>
 
         <gazebo>
-            <plugin name="gps_plugin_${name}" filename="libhector_gazego_ros_gps.so">
-                <updateRate>${update_rate}</updateRate>
-                <alwaysOn>true</alwaysOn>
+            <plugin name="aidboat_gps_plugin" filename="libhector_gazebo_ros_gps.so">
+                <alwaysOn>1</alwaysOn>
+                <updateRate>15</updateRate>
                 <bodyName>${name}_link</bodyName>
-                <!-- Manually prepend namespace to tf frame -->
                 <frameId>aidboat/${name}_link</frameId>
-                <topicName>aidboat/sensors/gps/gps/fix</topicName>
-                <!-- Note that the hector_gazebo_ros_gps plugin uses NWU coordinates for reporting velocities. This may cause problems if localization requires velocity in ENU. See Issue #64 in VRX project for details. https://bitbucket.org/osrf/vrx/issues/64 -->
-                <velocityTopicName>aidboat/sensors/gps/gps/fix_velocity</velocityTopicName>
-                <!-- Location of origin of Gazebo Sand Island map -->
-                <referenceLatitude>${lat}</referenceLatitude>
-                <referenceLongitude>${lon}</referenceLongitude>
-                <referenceAltitude>${elev}</referenceAltitude>
-                <referenceHeading>90</referenceHeading>
-                <offset>0.0 0.0 0.0</offset>
+                <topicName>aidboat/sensors/gps/fix</topicName>
+                <velocityTopicName>aidboat/sensors/gps/velocity_fix</velocityTopicName>
+<!--                <referenceLatitude>21.30996</referenceLatitude>
+                <referenceLongitude>-157.8901</referenceLongitude>
+                <referenceAltitude>0</referenceAltitude>
+                <referenceHeading>90</referenceHeading>-->
+                <offset>0 0 0</offset>
                 <drift>0.0001 0.0001 0.0001</drift>
                 <gaussianNoise>0 0 0</gaussianNoise>
-                <velocityOffset>0.0 0.0 0.0</velocityOffset>
-                <velocityDrift>0.0 0.0 0.0</velocityDrift>
-                <velocityGaussianNoise>0.0 0.0 0.0</velocityGaussianNoise>
+                <velocityOffset>0 0 0</velocityOffset>
+                <velocityDrift>0 0 0</velocityDrift>
+                <velocityGaussianNoise>0 0 0</velocityGaussianNoise>
             </plugin>
         </gazebo>
     </xacro:macro>

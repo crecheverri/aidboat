@@ -1,97 +1,30 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="aidboat-thrusters">
-  <!-- Macro for inserting an engine with its propeller. -->
-  <xacro:macro name="engine" params="prefix reflect reflect2">
-    <link name="${prefix}_engine_link">
-      <visual>
-        <origin xyz="0 0 0" rpy="0 0 ${reflect*(0.0244346)}" />
-        <geometry>
-          <mesh filename="package://aidboat_description/models/engine/mesh/${prefix}_engine.dae"/>
-        </geometry>
-      </visual>
-      <collision>
-        <origin xyz="0.011 0 0" rpy="0 1.5708 ${reflect*(0.0244346)}" />
-        <geometry>
-          <cylinder length="0.113" radius="0.05" />
-        </geometry>
-      </collision>
-      <inertial>
-        <mass value="0.126"/>
-        <inertia ixx="0.00002900992" ixy="0" ixz="0" iyy="0.00002900992" iyz="0" izz="0.0001575"/>
-      </inertial>
-    </link>
 
-    <link name="${prefix}_propeller_link">
-      <visual>
-        <origin xyz="0 0 0" rpy="0 0 ${reflect*(0.0244346)}" />
-        <geometry>
-          <mesh filename="package://aidboat_description/models/propeller/mesh/${prefix}_propeller.dae" />
-        </geometry>
-      </visual>
-      <collision>
-        <origin xyz="0.011 0 0" rpy="0 1.5708 ${reflect*(0.0244346)}" />
-        <geometry>
-          <cylinder length="0.03" radius="0.0381" />
-        </geometry>
-      </collision>
-      <inertial>
-        <mass value="0.030"/>
-        <inertia ixx="0.00000058378" ixy="0" ixz="0" iyy="0.00000058378" iyz="0" izz="0.00002177415" />
-      </inertial>
-    </link>
-
-    <joint name="${prefix}_chasis_engine_joint" type="revolute">
-      <axis xyz="1 0 0"/>
-      <limit lower="0" upper="0" effort="0" velocity="0"/>
-      <origin xyz="-0.741 ${reflect2*(0.47)} -0.016" rpy="0 0 0"/>
-      <parent link="base_link"/>
-      <child link="${prefix}_engine_link"/>
-    </joint>
-
-    <joint name="${prefix}_engine_propeller_joint" type="continuous">
-      <axis rpy="0 0 0" xyz="1 0 0" />
-      <parent link="${prefix}_engine_link"/>
-      <child link="${prefix}_propeller_link"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <limit effort="0.7250" velocity="369.97489" />
-      <dynamics friction="0.05" damping="0.05" />
-    </joint>
-  
-    <gazebo reference="${prefix}_engine_link">
-      <mu1>0.2</mu1>
-      <mu2>0.2</mu2>
-    </gazebo>  
-
-    <gazebo reference="${prefix}_propeller_link">
-      <mu1>0.2</mu1>
-      <mu2>0.2</mu2>
-    </gazebo>
-
-  </xacro:macro>
+  <xacro:include filename="$(find aidboat_description)/urdf/thrusters.xacro" />
+  <xacro:thrusters prefix="right" reflect="1" reflect2="-1"/>
+  <xacro:thrusters prefix="left" reflect="-1" reflect2="1"/> 
 
   <gazebo>
-    <plugin name="aidboat_gazebo_thrust" filename="libusv_gazebo_thrust_plugin.so" xmlns:xacro="http://ros.org/wiki/xacro">
-      <cmdTimeout>1.0</cmdTimeout>
-      <thruster>
-        <linkName>left_propeller_link</linkName>
-        <propJointName>left_engine_propeller_joint</propJointName>
-        <engineJointName>left_chasis_engine_joint</engineJointName>
-        <cmdTopic>left_thrust_cmd</cmdTopic>
-        <angleTopic>left_thrust_angle</angleTopic>
-        <enableAngle>false</enableAngle>
-      </thruster>
-      <thruster>
-        <linkName>right_propeller_link</linkName>
-        <propJointName>right_engine_propeller_joint</propJointName>
-        <engineJointName>right_chasis_engine_joint</engineJointName>
-        <cmdTopic>right_thrust_cmd</cmdTopic>
-        <angleTopic>right_thrust_angle</angleTopic>
-        <enableAngle>false</enableAngle>
-      </thruster>
-    </plugin>
+    <xacro:macro name="thrusters_plugin" params="prefix">
+      <plugin name="aidboat_gazebo_thrust" filename="libusv_gazebo_thrust_plugin.so" xmlns:xacro="http://ros.org/wiki/xacro">
+        <cmdTimeout>1.0</cmdTimeout>
+        <thruster>
+          <linkName>${prefix}_propeller_link</linkName>
+          <propJointName>${prefix}_engine_propeller_joint</propJointName>
+          <engineJointName>${prefix}_chasis_engine_joint</engineJointName>
+          <cmdTopic>${prefix}_thrust_cmd</cmdTopic>
+          <angleTopic>${prefix}_thrust_angle</angleTopic>
+          <enableAngle>false</enableAngle>
+          <mappingType>0</mappingType>
+          <maxCmd>1.0</maxCmd>
+          <maxForceFwd>51.4849</maxForceFwd>
+          <maxForceRev>-40.2073</maxForceRev>
+        </thruster>
+      </plugin>
+    </xacro:macro>
+    <xacro:thrusters_plugin prefix="right"/>
+    <xacro:thrusters_plugin prefix="left"/>
   </gazebo>
-
-<xacro:engine prefix="right" reflect="1" reflect2="-1"/>
-<xacro:engine prefix="left" reflect="-1" reflect2="1"/>
 
 </robot>

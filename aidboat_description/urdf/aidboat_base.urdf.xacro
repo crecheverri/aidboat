@@ -4,7 +4,7 @@
 		<collision name="${prefix}_hull">
 			<origin xyz="0.273998 ${reflect*(0.447)} -0.146" rpy="0 0 ${reflect*(-0.0244346)}"/>
 			<geometry>
-				<box size="2.002 0.286 0.292"/>
+				<box size="1.94 0.286 0.292"/>
 			</geometry>
 		</collision>
 	</xacro:macro>
@@ -38,7 +38,7 @@
 		<visual>
 			<origin rpy="0 0 0" xyz="0 0 0.292"/>
 			<geometry>
-				<mesh filename="package://aidboat_description/models/aidboat_base/mesh/AIDBOAT_Base.dae"/>
+				<mesh filename="package://aidboat_description/meshes/base/AIDBOAT_Base.dae"/>
 			</geometry>
 		</visual>
 	</link>
