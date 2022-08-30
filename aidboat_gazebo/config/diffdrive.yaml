@@ -1,0 +1,18 @@
+teleop:
+  move_left_thruster:
+    type: topic
+    message_type: std_msgs/Float32
+    topic_name: left_thrust_cmd
+    axis_mappings:
+      - axis: 1
+        target: data
+        scale: 1.0
+
+  move_right_thruster:
+    type: topic
+    message_type: std_msgs/Float32
+    topic_name: right_thrust_cmd
+    axis_mappings:
+      - axis: 4
+        target: data
+        scale: 1.0

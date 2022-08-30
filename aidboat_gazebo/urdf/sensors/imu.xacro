@@ -38,7 +38,7 @@
                 <topicName>aidboat/sensors/imu/data</topicName>
                 <serviceName>aidboat/sensors/imu_service</serviceName>
                 <!--Manually prepend namespace to tf frame -->
-                <frameId>aidboat/${name}_link</frameId>
+                <frameId>${name}_link</frameId>
                 <alwaysOn>true</alwaysOn>
                 
                 <accelOffset>0.0 0.0 0.0</accelOffset>

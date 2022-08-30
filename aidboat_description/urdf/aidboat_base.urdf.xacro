@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="aidboat">
 	<xacro:macro name="collisions" params="prefix reflect">
 		<collision name="${prefix}_hull">
-			<origin xyz="0.273998 ${reflect*(0.447)} -0.146" rpy="0 0 ${reflect*(-0.0244346)}"/>
+			<origin xyz="0.273998 ${reflect*(0.447)} 0.146" rpy="0 0 ${reflect*(-0.0244346)}"/>
 			<geometry>
 				<box size="1.94 0.286 0.292"/>
 			</geometry>
@@ -26,7 +26,7 @@
 		</inertial>
 
 		<collision name="top_base">
-			<origin xyz="0 0 0.1255" rpy="0 0 0"/>
+			<origin xyz="0 0 0.418" rpy="0 0 0"/>
 			<geometry>
 				<box size="0.73 1.15767 0.251"/>
 			</geometry>

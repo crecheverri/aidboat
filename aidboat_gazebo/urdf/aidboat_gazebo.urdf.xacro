@@ -6,7 +6,6 @@
 <xacro:include filename="$(find aidboat_description)/urdf/aidboat_base.urdf.xacro" />
 
 <!-- == Thrusters == -->
-<!--<xacro:include filename="$(find aidboat_gazebo)/urdf/thruster_layouts/thrusters.urdf" />-->
 <xacro:include filename="$(find aidboat_gazebo)/urdf/thrusters_gazebo.xacro" />
 
 <!-- == Hydrodynamics plugins == -->

@@ -1,0 +1,38 @@
+digraph G {
+node [shape=box];
+"base_link" [label="base_link"];
+"camera_link" [label="camera_link"];
+"camera_link_optical" [label="camera_link_optical"];
+"dummy_link" [label="dummy_link"];
+"gps_link" [label="gps_link"];
+"imu_link" [label="imu_link"];
+"left_engine_link" [label="left_engine_link"];
+"left_propeller_link" [label="left_propeller_link"];
+"lidar_link" [label="lidar_link"];
+"lidar_laser" [label="lidar_laser"];
+"right_engine_link" [label="right_engine_link"];
+"right_propeller_link" [label="right_propeller_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_link" -> "camera_joint" [label="xyz: 0.355 0 0.422 \nrpy: 0 -0 0"]
+"camera_joint" -> "camera_link"
+"camera_link" -> "camera_to_camera_optical_joint" [label="xyz: 0 0 0 \nrpy: -1.5708 -5.55112e-17 -1.5708"]
+"camera_to_camera_optical_joint" -> "camera_link_optical"
+"base_link" -> "dummy_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"dummy_joint" -> "dummy_link"
+"base_link" -> "gps_joint" [label="xyz: 0.23 0.45 0.3736 \nrpy: 0 -0 0"]
+"gps_joint" -> "gps_link"
+"base_link" -> "imu_joint" [label="xyz: -0.28 0 0.3386 \nrpy: 0 -0 0"]
+"imu_joint" -> "imu_link"
+"base_link" -> "left_chasis_engine_joint" [label="xyz: -0.741 0.47 -0.016 \nrpy: 0 -0 0"]
+"left_chasis_engine_joint" -> "left_engine_link"
+"left_engine_link" -> "left_engine_propeller_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"left_engine_propeller_joint" -> "left_propeller_link"
+"base_link" -> "lidar_joint" [label="xyz: -0.28 0 0.543 \nrpy: 0 -0 0"]
+"lidar_joint" -> "lidar_link"
+"lidar_link" -> "lidar_laser_joint" [label="xyz: 0.055 0 0.116 \nrpy: 0 -0 0"]
+"lidar_laser_joint" -> "lidar_laser"
+"base_link" -> "right_chasis_engine_joint" [label="xyz: -0.741 -0.47 -0.016 \nrpy: 0 -0 0"]
+"right_chasis_engine_joint" -> "right_engine_link"
+"right_engine_link" -> "right_engine_propeller_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"right_engine_propeller_joint" -> "right_propeller_link"
+}

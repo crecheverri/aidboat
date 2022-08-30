@@ -1,0 +1,13 @@
+<launch>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find vrx_gazebo)/worlds/example_course.world" />
+        <arg name="verbose" value="false"/>
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+    </include>
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find aidboat_gazebo)/urdf/aidboat_gazebo.urdf.xacro'" />
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model aidboat -x 158 -y 108 -z 0.1 -R 0 -P 0 -Y -2.76 -model aidboat" />
+
+</launch>
