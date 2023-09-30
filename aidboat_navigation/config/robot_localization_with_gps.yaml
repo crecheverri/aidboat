@@ -1,10 +1,10 @@
-frequency: 50
+frequency: 60
 
 publish_tf: true
 
 odom_frame: odom
 base_link_frame: base_link
-world_frame: map
+world_frame: odom
 map_frame: map
 
 imu0: /aidboat/sensors/imu/data
@@ -12,14 +12,14 @@ imu0_config: [false, false, false,
               true, true, true,
               false, false, false,
               true, true, true,
-              false, false, false]
+              true, true, true]
 imu0_differential: false
 
-odom0: /aidboat/robot_localization/odometry/gps
-odom0_config: [false, false, false,
+odom0: /aidboat/odometry/gps
+odom0_config: [true, true, true,
                false, false, false,
-               true, true, true,
-               false, false, true,
+               false, false, false,
+               false, false, false,
                false, false, false]
 odom0_differential: false
 

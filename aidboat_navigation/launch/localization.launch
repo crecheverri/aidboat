@@ -1,0 +1,30 @@
+<launch>
+    <!-- Run the ekf for map to odom config -->
+   <!-- <arg name="map_file" default="$(find aidboat_navigation)/maps/mymap_empty.yaml"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />-->
+
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_with_gps" clear_params="true">
+        <rosparam command="load" file="$(find aidboat_navigation)/config/aidboat_localization_config.yaml" />
+    </node>
+
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
+        <param name="magnetic_declination_radians" value="0"/>
+        <param name="yaw_offset" value="0"/>
+        <param name="zero_altitude" value="true"/>
+
+
+        <param name="broadcast_utm_transform" value="false"/>
+        <param name="publish_filtered_gps" value="false"/>
+
+
+        <param name="use_odometry_yaw" value="false"/>
+        <param name="wait_for_datum" value="false"/>
+
+
+        <remap from="/imu/data" to="/aidboat/sensors/imu/data" />
+        <remap from="/gps/fix" to="/aidboat/sensors/gps/fix" />
+        <!--<remap from="/odometry/filtered" to="/odom" />-->
+    </node>
+
+
+</launch>
