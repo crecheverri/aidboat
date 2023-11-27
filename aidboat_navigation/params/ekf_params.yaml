@@ -1,4 +1,4 @@
-  ekf_local_odom: # Used only for broadcasting odom to base_link transforms
+  ekf_local_odom: 
     frequency: 30
     sensor_timeout: 0.1
     two_d_mode: true
@@ -13,7 +13,7 @@
     world_frame: odom
 
   # --------------------------------------
-  # imu configure:
+  # imu:
 
     imu0: /aidboat/sensors/imu/data
     imu0_config: [false, false, false,
@@ -25,7 +25,6 @@
     imu0_differential: false
     imu0_relative: false
     imu0_queue_size: 10
-  #  imu0_remove_gravitational_acceleration: false
 
     use_control: false
 
@@ -90,7 +89,7 @@
     odom0_relative: false
 
   # -------------------------------------
-  # imu configure:
+  # imu:
 
     imu0: /aidboat/sensors/imu/data
     imu0_config: [false, false, false,
@@ -102,7 +101,6 @@
     imu0_differential: false
     imu0_relative: false
     imu0_queue_size: 10
-  #  imu0_remove_gravitational_acceleration: false
 
     use_control: false
 
