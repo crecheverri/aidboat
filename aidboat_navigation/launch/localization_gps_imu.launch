@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+  <rosparam command="load" file="$(find aidboat_navigation)/params/ekf_params.yaml" />
+  <rosparam command="load" file="$(find aidboat_navigation)/params/navsat_params.yaml" />
+ 
+ <node pkg="robot_localization" type="ekf_localization_node" name="ekf_local_odom" clear_params="true"/>
+
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_global_map" clear_params="true">
+    <remap from="odometry/filtered" to="odometry/filtered_map"/>
+    <remap from="aidboat/sensors/gps/odom" to ="odometry/gps"/>
+  </node>
+
+  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform" clear_params="true" output="screen" >
+      <remap from="odometry/filtered" to="odometry/filtered_map"/>
+      <remap from="gps/fix" to="/aidboat/sensors/gps/fix"/>
+      <remap from="imu/data" to="/aidboat/sensors/imu/data"/>
+  </node>
+
+</launch>
