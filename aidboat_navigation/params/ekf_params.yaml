@@ -17,10 +17,10 @@
 
     imu0: /aidboat/sensors/imu/data
     imu0_config: [false, false, false,
-                  true,  true,  false,
+                  false,  false,  true,
                   false, false, false,
-                  true,  true,  true,
-                  true,  true,  true]
+                  false,  false,  true,
+                  true,  true, false]
     imu0_nodelay: false
     imu0_differential: false
     imu0_relative: false
@@ -93,10 +93,10 @@
 
     imu0: /aidboat/sensors/imu/data
     imu0_config: [false, false, false,
-                  true,  true, false,
+                  false,  false, true,
                   false, false, false,
-                  true,  true,  true,
-                  true,  true,  true]
+                  false,  false,  true,
+                  true,  true,  false]
     imu0_nodelay: true
     imu0_differential: false
     imu0_relative: false
