@@ -22,7 +22,7 @@
 		<inertial>
 			<mass value="32.712"/>
 			<origin xyz="0 0.26377 0.02064" rpy="0 0 0"/>		
-			<inertia ixx="4.662514672" ixy="0" ixz="0" iyy="12.57628507" iyz="0" izz="15.22053986"/>
+			<inertia ixx="4.4927206" ixy="0" ixz="0" iyy="11.783203" iyz="0" izz="14.626694"/>
 		</inertial>
 
 		<collision name="top_base">

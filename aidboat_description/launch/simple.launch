@@ -3,8 +3,9 @@
     <!--   <arg name="world_name" value="$(find vrx_gazebo)/worlds/example_course.world" />
     </include>-->
 
-    <param name="robot_description" command="$(find xacro)/xacro $(find aidboat_description)/urdf/aidboat.urdf" />
+    <param name="robot_description" command="$(find xacro)/xacro $(find aidboat_description)/urdf/aidboat_base.urdf.xacro" />
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model aidboat -x 158 -y 108 -z 0.1" />
+    <node name="rviz" pkg="rviz" type="rviz" args="" />
 
 </launch>
 
