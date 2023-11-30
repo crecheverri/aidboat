@@ -5,23 +5,23 @@
         <gazebo>
             <plugin name="usv_dynamics_${name}" filename="libusv_gazebo_dynamics_plugin.so">
                 <bodyName>base_link</bodyName>
-                <!-- Must be same as the oxean model! -->
+                <!-- Must be same as the ocean model! -->
                 <waterLevel>0</waterLevel>
                 <waterDensity>997.8</waterDensity>
                 <!-- Added mass -->
-                <xDotU>0.0</xDotU>
+                <xDotU>61.7</xDotU>
                 <yDotV>0.0</yDotV>
                 <nDotR>0.0</nDotR>
                 <!-- Linear and quadratic drag -->
-                <xU>51.3</xU>
-                <xUU>72.4</xUU>
-                <yV>40.0</yV>
+                <xU>0.0</xU>
+                <xUU>16.9</xUU>
+                <yV>20.0</yV>
                 <yVV>0.0</yVV>
-                <zW>500.0</zW>
-                <kP>50.0</kP>
-                <mQ>50.0</mQ>
-                <nR>400.0</nR>
-                <nRR>0.0</nRR>
+                <zW>20.0</zW>
+                <kP>20.0</kP>
+                <mQ>20.0</mQ>
+                <nR>0.0</nR>
+                <nRR>139.0</nRR>
                 <!-- General dimensions -->
                 <!-- <boatArea>2.2</boatArea> -->
                 <hullRadius>0.213</hullRadius>
