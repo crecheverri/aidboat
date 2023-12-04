@@ -33,7 +33,7 @@
 
         <gazebo>
             <plugin name="aidboat_imu_plugin" filename="libhector_gazebo_ros_imu.so">
-                <updateRate>50</updateRate>
+                <updateRate>15</updateRate>
                 <bodyName>${name}_link</bodyName>
                 <topicName>aidboat/sensors/imu/data</topicName>
                 <serviceName>aidboat/sensors/imu_service</serviceName>

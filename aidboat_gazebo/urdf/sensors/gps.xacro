@@ -34,13 +34,13 @@
         <gazebo>
             <plugin name="aidboat_gps_plugin" filename="libhector_gazebo_ros_gps.so">
                 <alwaysOn>true</alwaysOn>
-                <updateRate>15</updateRate>
+                <updateRate>15</updateRate> 
                 <bodyName>${name}_link</bodyName>
                 <frameId>${name}_link</frameId>
                 <topicName>aidboat/sensors/gps/fix</topicName>
                 <velocityTopicName>aidboat/sensors/gps/fix_velocity</velocityTopicName>
-                <referenceLatitude>21.30996</referenceLatitude>
-                <referenceLongitude>-157.8901</referenceLongitude>
+                <referenceLatitude>-33.4317</referenceLatitude>
+                <referenceLongitude>150.4031</referenceLongitude>
                 <referenceAltitude>0</referenceAltitude>
                 <referenceHeading>90</referenceHeading>
                 <offset>0 0 0</offset>

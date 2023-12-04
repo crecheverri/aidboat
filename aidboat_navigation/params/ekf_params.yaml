@@ -1,5 +1,5 @@
   ekf_local_odom: 
-    frequency: 30
+    frequency: 15
     sensor_timeout: 0.1
     two_d_mode: true
     transform_time_offset: 0.0
@@ -24,7 +24,7 @@
     imu0_nodelay: false
     imu0_differential: false
     imu0_relative: false
-    imu0_queue_size: 10
+    #imu0_queue_size: 10
 
     use_control: false
 
@@ -61,7 +61,7 @@
                                   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    1.0]
 
   ekf_global_map:
-    frequency: 30
+    frequency: 15
     sensor_timeout: 0.1
     two_d_mode: true
     transform_time_offset: 0.0
@@ -83,7 +83,7 @@
                   false, false, false,
                   false, false, false,
                   false, false, false]
-    odom0_queue_size: 10
+    #odom0_queue_size: 10
     odom0_nodelay: true
     odom0_differential: false
     odom0_relative: false
@@ -100,7 +100,7 @@
     imu0_nodelay: true
     imu0_differential: false
     imu0_relative: false
-    imu0_queue_size: 10
+    #imu0_queue_size: 10
 
     use_control: false
 

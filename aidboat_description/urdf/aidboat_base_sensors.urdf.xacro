@@ -42,6 +42,7 @@
         <parent link="dummy"/>
         <child link="base_link"/>
     </joint>
+    
     <link name="lidar_link">
         <visual name="lidar_visual">
             <origin xyz="0 0 0" rpy="0 0 -1.5708"/>

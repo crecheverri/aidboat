@@ -1,15 +1,22 @@
 <launch>
+
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find vrx_gazebo)/worlds/example_course.world" />
+        <arg name="world_name" value="$(find vrx_gazebo)/worlds/2022_practice/wayfinding0.world" />
     </include>
 	<arg name="gui" default="true" />
     <arg name="config" default="aidboat_gazebo" />
     <param name="robot_description" command="$(find xacro)/xacro $(find aidboat_gazebo)/urdf/aidboat_gazebo.urdf.xacro" />
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model aidboat" />
-	<node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_publisher"  />
+
 	<node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
 	<node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-	<!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find aidboat_gazebo)/rviz/$(arg config).rviz" /> -->
-    <node name="rviz" pkg="rviz" type="rviz" args="" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find aidboat_gazebo)/rviz/$(arg config).rviz" />
+
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_publisher">
+    <param name="publish_frequency" type="double" value="30.0"/>
+    </node>
+
+
 </launch>
 

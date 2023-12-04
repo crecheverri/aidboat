@@ -1,8 +1,9 @@
 image: testmap.jpg
 resolution: 0.3 #m/px
-origin: [0, 0, 0]
+origin: [-500, -500, 0]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196
 
 #image size is 1504 x 1504 pixels setting 0.666 to have a 2 km x 2 km map.
+#origin: The 2-D pose of the lower-left pixel in the map, as (x, y, yaw), with yaw as counterclockwise rotation (yaw=0 means no rotation)
